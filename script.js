@@ -4,7 +4,7 @@ import { quizzCapital } from './questions.js';
 const containerQuestion = document.querySelector(".container-question")
 const containerChoices = document.querySelector(".container-choices")
 const rejouerButton = document.querySelector("#rejouer")
-const timerDisplay = document.getElementById("timer");
+const progressBar= document.getElementById("progress-bar")
 
 
 
@@ -15,16 +15,16 @@ let tempsRestant = 10 // compte à rebours
 let interValId = null; // pour stocker le timer
 
 
-const nextQuestion=()=>{
+const nextQuestionWithoutButton=()=>{
 setTimeout(() => {
     if(indexQuestion<quizzCapital.length -1) {
     indexQuestion+=1
+    progressBar.classList.remove("danger-blink")
     showQuestion()
     }
     else{
     containerQuestion.innerText=`Fin du quizz tu as obtenu ${score} bonnes réponses sur ${quizzCapital.length}`
     containerChoices.innerHTML = ""
-    document.getElementById("timer").innerText=""
     rejouerButton.style.display= "inline-block"
     }
 }, 2000)
@@ -39,19 +39,29 @@ const showQuestion = () => {
 
 
     let questionActuelle = quizzCapital[indexQuestion] // je crée une variable qui prendra le tableau d'objet (valeur = 0 plus haut donc la question 0 )
+    document.body.style.backgroundImage = questionActuelle.background;
     let askHtml = document.createElement("p")  // je crée une balise p
     askHtml.innerText = questionActuelle.texte // je modifie le contenu de ma balise p pour que ce sois la question 
     containerQuestion.appendChild(askHtml) // la div container-question devient le parent de la div p donc la div p est dans la class container question
 
     tempsRestant = 10 // remet le compteurr à zero a chaque debut de qst
+    progressBar.style.width= "100%" // remet à 100% chaque qst
     clearInterval(interValId) // permet d'arrêter le compteur 
-    timerDisplay.innerText = tempsRestant // maj de l'affichage du timer
     interValId = setInterval(() => {
         tempsRestant -= 1
-        timerDisplay.innerText = tempsRestant
+        if (tempsRestant > 5) {
+            progressBar.style.backgroundColor= "green"
+          } else if (tempsRestant > 2) {
+            progressBar.style.backgroundColor="orange"
+          } else if(tempsRestant<=2){
+            progressBar.style.backgroundColor= "Red"
+            progressBar.classList.add("danger-blink");     // Ajoute l’effet clignotement 
+          }
+      let pourcentage = (tempsRestant/10)*100  // % 10% par secondes
+        progressBar.style.width = `${pourcentage}%` // dynamique de la barre 
         if(tempsRestant === 0){
             clearInterval(interValId)
-            nextQuestion() 
+            nextQuestionWithoutButton() 
             const allButtons = containerChoices.querySelectorAll("button")
                 allButtons.forEach((button) => {
                     button.disabled = true
@@ -89,12 +99,12 @@ const showQuestion = () => {
                     }
                     button.disabled = true
                 })
-                   nextQuestion()
+                   nextQuestionWithoutButton()
             })
         })
     }
 
-rejouerButton.addEventListener('click', () => { // si je clique sur le bouton rejouer lit le code ci dessous
+    rejouerButton.addEventListener('click', () => { // si je clique sur le bouton rejouer lit le code ci dessous
     indexQuestion = 0 // valeur redevient à zero
     score = 0 // remet le score à zero
     rejouerButton.style.display = "none" // bouton rejouer invisible
@@ -102,13 +112,3 @@ rejouerButton.addEventListener('click', () => { // si je clique sur le bouton re
 })
 
 showQuestion()
-
-
-
-
-
-
-
-
-
-

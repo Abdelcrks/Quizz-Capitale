@@ -1,11 +1,110 @@
-body{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  /* Police moderne et lisible */
+    display: flex;                           /* Active Flexbox pour centrer le contenu */
+    justify-content: center;                /* Centre horizontalement */
+    align-items: center;                    /* Centre verticalement */
+    height: 100vh;                          /* Hauteur = 100% de la fenêtre visible */
+    background-size: cover;                 /* L’image de fond remplit tout l’écran */
+    background-repeat: no-repeat;           /* Évite que l’image se répète */
+    background-position: center;            /* Centre l’image de fond */
+  }
+  
+
+  .quizz {
+    padding: 60px 40px;                     /* Espace intérieur haut/bas 60px, gauche/droite 40px */
+    border-radius: 16px;                    /* Coins arrondis */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2); /* Ombre portée subtile */
+    text-align: center;                     /* Centre le texte à l’intérieur */
+    background-color: rgba(255,255,255,0.8); /* Fond blanc semi-transparent */
+    backdrop-filter: blur(8px);            /* Floute l’arrière-plan derrière le quizz */
+    opacity: 0.90;                          /* Légère transparence du bloc */
+  }
+  
+  
+  .container-question {
+    font-size: 25px;                        /* Taille du texte de la question */
+    font-weight: bold;                      /* Met en gras */
+  }
+  
+
+  .container-choices {
+    display: flex;                          /* Active Flexbox */
+    flex-direction: column;                /* Les éléments (boutons) sont empilés verticalement */
+    align-items: center;                   /* Centre les boutons horizontalement */
+    gap: 15px;                              /* Espace vertical entre les boutons */
+  }
+  
+  .container-choices button {
+    padding: 12px 18px;                     /* Taille intérieure du bouton */
+    margin: 10px 0;                         /* Espace vertical entre les boutons */
+    background-color: rgb(255, 255, 255);               /* Fond blanc par défaut */
+    border: none;                           /* Supprime le cadre par défaut du bouton */
+    border-radius: 8px;                     /* Coins arrondis */
+    font-weight: bold;                      /* Texte en gras */
+    transition: all 0.3s ease;              /* Animation fluide quand on change une propriété */
+    width: 80%;                             /* Le bouton fait 80% de la largeur de son conteneur */
+    max-width: 300px;                       /* Ne dépasse jamais 300px de large */
+  }
+  
+  
+  .container-choices button:hover {
+    background-color: #00b5b8;             /* Couleur de fond au survol */
+    color: white;                           /* Texte devient blanc */
+    cursor: pointer;                        /* Curseur main (cliquable) */
+    transform: scale(1.05);                 /* Légère augmentation de la taille du bouton */
+  }
+  
+  #rejouer {
+    padding: 12px 18px;                     /* Même padding que les autres boutons */
+    margin-top: 20px;                       /* Espace au-dessus du bouton */
+    background-color: white;               /* Fond blanc */
+    border: none;                           /* Pas de bordure */
+    border-radius: 8px;                     /* Coins arrondis */
+    font-weight: bold;                      /* Texte en gras */
+    transition: all 0.3s ease;              /* Animation fluide */
+    width: 80%;                             /* Même largeur que les autres boutons */
+    max-width: 300px;                       /* Ne dépasse pas 300px */
+    cursor: pointer;                        /* Curseur main */
+    display: block;                         /* Nécessaire pour le centrage avec margin auto */
+    margin-left: auto;                      /* Centre horizontalement */
+    margin-right: auto;
+  }
+  
+  
+  #rejouer:hover {
+    background-color: #00b5b8;             /* Fond orange au survol */
+    color: white;                           /* Texte devient blanc */
+    transform: scale(1.05);                 /* Grossissement léger */
+  }
+  
+  #progress-container {
+    width: 100%;             /* prend toute la largeur possible */
+    max-width: 300px;        /* mais ne dépasse jamais 300px */
+    height: 10px;
+    border-radius: 5px;
+    background-color: #ddd;  /* une couleur claire pour le fond */
+    margin: 20px auto;       /* espace au-dessus et centré */
+    overflow: hidden;        /* cache ce qui dépasse */
+  }
+  
+  #progress-bar {
+    background-color: green;
+    height: 100%;
+    width: 100%; /* on commence à 100% → puis on diminue avec JS */
+    border-radius: 5px;
+    transition: width 1s linear;
+  }
+  
+  @keyframes clignoter {
+    0% { opacity: 1; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1; }
+  }
+
+.danger-blink{
+  animation: clignoter 1s infinite;
 }
 
-#next {
-    display: none;
-}
+
+
