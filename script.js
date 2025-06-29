@@ -12,7 +12,7 @@ let indexQuestion = 0 //  Index de la question actuelle dans le tableau (0 = pre
 let score = 0 // nombre de bonne réponse 
 let reponseSelectionner = false // indique si l'utilisateur a selectionner une reponse 
 let tempsRestant = 10 // compte à rebours
-let interValId = null; // pour stocker le timer
+let interValId = null; // stock le timer
 
 
 const nextQuestionWithoutButton=()=>{
