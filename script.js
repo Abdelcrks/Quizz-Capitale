@@ -76,7 +76,7 @@ const homePage = () => {
 
 const showChoices = (currentQuestion) => {
   // parcourt chaque option de réponse à la question
-  currentQuestion.choice.forEach((choice) => {
+  currentQuestion.choix.forEach((choice) => {
     const choiceButton = document.createElement("button")
     choiceButton.innerText = choice
     containerChoices.appendChild(choiceButton)
