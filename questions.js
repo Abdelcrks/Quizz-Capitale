@@ -19,7 +19,7 @@ export const quizzCapital = [
       "Québec"
     ],
     bonneReponse: "Ottawa",
-    background: "url('./images/Canada.jpg')"
+    background: "url('./images/canada.jpg')"
   },
   {
     texte: "Quelle est la capitale de Turquie ?",
