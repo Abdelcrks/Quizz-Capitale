@@ -1,6 +1,6 @@
 import { quizzCapital } from './questions.js';
 
-// je prends les élements html ci dessous
+
 const containerQuestion = document.querySelector(".container-question")
 const containerChoices = document.querySelector(".container-choices")
 const replayButton = document.querySelector("#rejouer")
@@ -8,19 +8,19 @@ const progressBar = document.getElementById("progress-bar")
 
 
 
-let index = 0 //  Index de la question actuelle dans le tableau (0 = première question)
-let score = 0 // nombre de bonne réponse 
-let selectedAnswer = false // indique si l'utilisateur a selectionner une reponse 
-let remainingTime = 10 // compte à rebours
-let interValId = null; // stock le timer
+let index = 0 
+let score = 0
+let selectedAnswer = false 
+let remainingTime = 10 
+let interValId = null; 
 
 
 
 
 const showQuestion = () => {
-  const currentQuestion = quizzCapital[index] // je crée une variable qui prendra le tableau d'objet (valeur = 0 plus haut donc la question 0 )
-  selectedAnswer = false  // quand je passe a une nouvelle question je réinitialise la variable pour forcer une réponse
-  containerChoices.innerHTML = ""; // vide les questions avant de remplir la nvl qst
+  const currentQuestion = quizzCapital[index] 
+  selectedAnswer = false  
+  containerChoices.innerHTML = "";
 
 
   changeBackground(currentQuestion.background)
@@ -33,7 +33,6 @@ const showQuestion = () => {
 
 
 
-// reset timer à 10sec , arret de l'ancien interval timer, remettre la barre de progression au max , en vert, et enlever le clignotement
 function resetTimer() {
   remainingTime = 10
   clearInterval(interValId)
@@ -42,7 +41,6 @@ function resetTimer() {
   progressBar.classList.remove("danger-blink");
 }
 
-// vide la qst precedente, insere la question et ajoute a la page
 function showQuestionText(currentQuestion) {
   containerQuestion.innerHTML = ""
   let askHtml = document.createElement("p")
@@ -50,7 +48,6 @@ function showQuestionText(currentQuestion) {
   containerQuestion.appendChild(askHtml)
 }
 
-// affiche qst suivante après 2sec
 const nextQuestionWithoutButton = () => {
   progressBar.style.backgroundColor = "green"
   progressBar.style.width = "100%"
@@ -75,7 +72,6 @@ const homePage = () => {
 
 
 const showChoices = (currentQuestion) => {
-  // parcourt chaque option de réponse à la question
   currentQuestion.choix.forEach((choice) => {
     const choiceButton = document.createElement("button")
     choiceButton.innerText = choice
@@ -84,7 +80,6 @@ const showChoices = (currentQuestion) => {
     choiceButton.addEventListener("click", () => {
       // stop le timer en cours
       clearInterval(interValId)
-      // recupere tout les boutons visibles
 
       const allButtons = containerChoices.querySelectorAll("button")
 
@@ -96,13 +91,10 @@ const showChoices = (currentQuestion) => {
         choiceButton.style.backgroundColor = "red"
         selectedAnswer = true
       }
-      // parcourt tout les boutons pour 
       allButtons.forEach((button) => {
         if (button.innerText === currentQuestion.bonneReponse) {
-          // si on s'est trompé colorie la bonne reponse
           button.style.backgroundColor = "green"
         }
-        // bloque les autres boutons
         button.disabled = true
       })
       // question suivante avec un délai 2secondes cf
@@ -139,9 +131,8 @@ function initialiserTimer(currentQuestion) {
 }
 
 const majBarreProgression = () => {
-  // Convertit le temps restant en pourcentage (10 = 100%)
   const pourcentage = (remainingTime / 10) * 100
-  // Applique la nouvelle largeur
+
   progressBar.style.width = `${pourcentage}%`
 
 
@@ -153,17 +144,16 @@ const majBarreProgression = () => {
     progressBar.classList.remove("danger-blink")
   } else {
     progressBar.style.backgroundColor = "red"
-    // Ajoute l’effet clignotement
     progressBar.classList.add("danger-blink")
   }
 }
 
 
 
-replayButton.addEventListener('click', () => { // si je clique sur le bouton rejouer lit le code ci dessous
-  index = 0 // valeur redevient à zero
-  score = 0 // remet le score à zero
-  replayButton.style.display = "none" // bouton rejouer invisible
+replayButton.addEventListener('click', () => { 
+  index = 0 
+  score = 0 
+  replayButton.style.display = "none" 
   showQuestion()
 })
 
