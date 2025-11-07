@@ -28,4 +28,3 @@ Répondez avant la fin du compte à rebours, obtenez un score et découvrez votr
 ---
 
 
-![alt text](<Capture d’écran 2025-11-07 à 10.33.50.png>)
