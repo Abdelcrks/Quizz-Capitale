@@ -195,7 +195,7 @@ export const quizzCapital = [
       "Arequipa"
     ],
     bonneReponse: "Lima",
-    background: "url('./images/perou.jpg')"
+    background: "url('./images/pérou.jpg')"
   },
   {
     texte: "Quelle est la capitale de États-Unis ?",
